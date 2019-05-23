@@ -195,7 +195,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         script.executeAndReturnError(&error)
         
         if(error != nil) {
-            print("error while pausing or playing")
+            let alert = NSAlert()
+            alert.messageText = "Error running \(name)"
+            alert.informativeText = "Error with sudo command \(cmd)"
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
             dump(error)
         }
         self.queryServicesAndUpdateMenu()
